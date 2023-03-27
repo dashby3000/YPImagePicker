@@ -63,10 +63,11 @@ open class YPPickerVC: YPBottomPager, YPBottomPagerDelegate {
         }
         
         // Camera
+        //DASHBY CHANGED
         if YPConfig.screens.contains(.photo) {
             cameraVC = YPCameraVC()
             cameraVC?.didCapturePhoto = { [weak self] img in
-                self?.didSelectItems?([YPMediaItem.photo(p: YPMediaPhoto(image: img,
+                self?.didSelectItems?([YPMediaItem.photo(p: YPMediaPhoto(image: img, originalFromDeviceImage: img,
                                                                          fromCamera: true))])
             }
         }
@@ -192,11 +193,7 @@ open class YPPickerVC: YPBottomPager, YPBottomPagerDelegate {
     open override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         shouldHideStatusBar = false
-    }
-    
-    deinit {
         stopAll()
-        ypLog("YPPickerVC deinited ✅")
     }
     
     @objc
@@ -232,7 +229,7 @@ open class YPPickerVC: YPBottomPager, YPBottomPagerDelegate {
         }
         
         if YPConfig.library.options != nil {
-            titleView.subviews(
+            titleView.sv(
                 label
             )
             |-(>=8)-label.centerHorizontally()-(>=8)-|
@@ -253,7 +250,7 @@ open class YPPickerVC: YPBottomPager, YPBottomPagerDelegate {
             button.addTarget(self, action: #selector(navBarTapped), for: .touchUpInside)
             button.setBackgroundColor(UIColor.white.withAlphaComponent(0.5), forState: .highlighted)
             
-            titleView.subviews(
+            titleView.sv(
                 label,
                 arrow,
                 button

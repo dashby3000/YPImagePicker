@@ -10,8 +10,9 @@ import UIKit
 import Stevia
 
 class YPLoadingView: UIView {
-    
-    let spinner = UIActivityIndicatorView(style: .whiteLarge)
+    //DASHBY CHANGE
+    let spinner = UIActivityIndicatorView(style: .large) 
+    //let spinner = UIActivityIndicatorView(style: .whiteLarge)
     let processingLabel = UILabel()
     
     convenience init() {
@@ -21,7 +22,7 @@ class YPLoadingView: UIView {
         let stack = UIStackView(arrangedSubviews: [spinner, processingLabel])
         stack.axis = .vertical
         stack.spacing = 20
-        subviews(
+        sv(
             stack
         )
         

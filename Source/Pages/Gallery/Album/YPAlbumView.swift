@@ -12,12 +12,15 @@ import Stevia
 class YPAlbumView: UIView {
     
     let tableView = UITableView()
-    let spinner = UIActivityIndicatorView(style: .gray)
+    
+    //DASHBY CHANGE
+    let spinner = UIActivityIndicatorView(style: .medium) 
+    //let spinner = UIActivityIndicatorView(style: .gray)
     
     convenience init() {
         self.init(frame: .zero)
         
-        subviews(
+        sv(
             tableView,
             spinner
         )

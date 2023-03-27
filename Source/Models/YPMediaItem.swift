@@ -20,8 +20,12 @@ public class YPMediaPhoto {
     public let exifMeta: [String: Any]?
     public var asset: PHAsset?
     public var url: URL?
+   
+    //DASHBY CHANGED
+    public let originalFromDeviceImage: UIImage
     
     public init(image: UIImage,
+                originalFromDeviceImage: UIImage,
                 exifMeta: [String: Any]? = nil,
                 fromCamera: Bool = false,
                 asset: PHAsset? = nil,
@@ -32,6 +36,7 @@ public class YPMediaPhoto {
         self.exifMeta = exifMeta
         self.asset = asset
         self.url = url
+        self.originalFromDeviceImage = originalFromDeviceImage
     }
 }
 

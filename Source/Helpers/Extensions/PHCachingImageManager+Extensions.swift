@@ -19,11 +19,12 @@ extension PHCachingImageManager {
         options.isSynchronous = true // Ok since we're already in a background thread
         return options
     }
-    
+   
+    //DASHBY CHANGE
     func fetchImage(for asset: PHAsset,
-					cropRect: CGRect,
-					targetSize: CGSize,
-					callback: @escaping (UIImage, [String: Any]) -> Void) {
+                    cropRect: CGRect,
+                    targetSize: CGSize,
+                    callback: @escaping (UIImage, UIImage, [String: Any]) -> Void) {
         let options = photoImageRequestOptions()
     
         // Fetch Highiest quality image possible.
@@ -40,7 +41,7 @@ extension PHCachingImageManager {
                 if let imageRef = image.cgImage?.cropping(to: scaledCropRect) {
                     let croppedImage = UIImage(cgImage: imageRef)
                     let exifs = self.metadataForImageData(data: data)
-                    callback(croppedImage, exifs)
+                    callback(croppedImage, image, exifs)
                 }
             }
         }
@@ -87,12 +88,12 @@ extension PHCachingImageManager {
     /// So the callback fires twice.
     func fetch(photo asset: PHAsset, callback: @escaping (UIImage, Bool) -> Void) {
         let options = PHImageRequestOptions()
-		// Enables gettings iCloud photos over the network, this means PHImageResultIsInCloudKey will never be true.
+        // Enables gettings iCloud photos over the network, this means PHImageResultIsInCloudKey will never be true.
         options.isNetworkAccessAllowed = true
-		// Get 2 results, one low res quickly and the high res one later.
+        // Get 2 results, one low res quickly and the high res one later.
         options.deliveryMode = .opportunistic
-        requestImage(for: asset, targetSize: CGSize(width: asset.pixelWidth, height: asset.pixelHeight),
-					 contentMode: .aspectFill, options: options) { result, info in
+        requestImage(for: asset, targetSize: PHImageManagerMaximumSize,
+                     contentMode: .aspectFill, options: options) { result, info in
             guard let image = result else {
                 ypLog("No Result 🛑")
                 return
