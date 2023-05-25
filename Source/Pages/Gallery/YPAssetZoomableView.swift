@@ -77,6 +77,10 @@ final class YPAssetZoomableView: UIScrollView {
             strongSelf.setAssetFrame(for: strongSelf.videoView, with: preview)
 
             strongSelf.squaredZoomScale = strongSelf.calculateSquaredZoomScale()
+            // DASHBY CHANGE
+            if YPConfig.library.onlySquare {
+                strongSelf.fitImage(true)
+            }
             
             completion()
             
@@ -135,6 +139,10 @@ final class YPAssetZoomableView: UIScrollView {
             }
 
             strongSelf.squaredZoomScale = strongSelf.calculateSquaredZoomScale()
+            // DASHBY CHANGE
+            if YPConfig.library.onlySquare {
+                strongSelf.fitImage(true)
+            }
             
             completion(isLowResIntermediaryImage)
         }
