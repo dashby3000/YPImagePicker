@@ -19,6 +19,11 @@ class YPAlbumCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+       
+        // DASHBY CHANGE
+        thumbnail.layer.cornerRadius = 8
+        thumbnail.layer.borderColor = UIColor.separator.cgColor
+        thumbnail.layer.borderWidth = 0.5
         
         let stackView = UIStackView()
         stackView.axis = .vertical
